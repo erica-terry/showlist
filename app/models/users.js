@@ -2,7 +2,7 @@
 // load the things we need
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
-var ShowsSchema    = require('../models/shows.js').schema;
+var ShowsSchema    = require(process.cwd() + '/app/models/shows.js').schema;
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
