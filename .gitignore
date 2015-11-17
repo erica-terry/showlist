@@ -1,0 +1,2 @@
+#Ignore so database password isn't public
+config/database.js
