@@ -80,7 +80,7 @@
 
 		<div class="clearfix"></div>
 		<h3>Add a new show</h3>
-		<form name="main.addForm" class="form">
+		<form name="main.addForm" class="form" onsumbit="add()">
 			<div class="form-group">
 				<label>Title</label>
 				<input type="text" class="form-control" ng-model="main.add.title" required />
@@ -111,7 +111,7 @@
 
 				<div class="col-xs-6">
 
-					<button class="btn btn-success pull-right" ng-click="add()">
+					<button class="btn btn-success pull-right">
 						<span class="glyphicon glyphicon-plus-sign"></span> Add
 					</button>
 				</div>
