@@ -14,6 +14,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var path		 = require('path');
+var favicon      = require('serve-favicon');
+
 
 var configDB = require('./config/database.js');
 
@@ -34,6 +36,7 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 app.use(express.static(path.join(__dirname, 'app')));
 app.use(express.static(path.join(__dirname, 'app/controllers')));
 app.use(express.static(path.join(__dirname, 'views/templates')));
+app.use(favicon(path.join(__dirname, 'favicon.ico')));
 
 // required for passport
 app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
