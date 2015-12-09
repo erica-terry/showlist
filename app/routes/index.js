@@ -7,7 +7,7 @@ var ShowHandler = require('../controllers/showHandler.server.js');
 module.exports = function(app, passport) {
 
     app.get('/', isLoggedIn, function(req, res) {
-        res.redirect('/showlist')  // load the index.ejs file
+        res.redirect('/showlist') 
     });
 
     app.get('/login', function(req, res) {
@@ -58,7 +58,7 @@ module.exports = function(app, passport) {
     var showHandler = new ShowHandler();
     
     app.get('/showlist', isLoggedIn, function(req, res) {
-        res.render('showlist', { user : req.user});
+        res.render('showlist', { user : req.user });
     });
 
     app.route('/api/showlist')
@@ -85,9 +85,21 @@ module.exports = function(app, passport) {
 
     */
     
+        
+        
+    /////////////// Routes for another user's showlist page ////////////////
+        
+    app.get('/user/:_id', function(req, res) {
+        res.render('user', { user: req.user });
+    })
+        
+    app.route('/api/user/:_id')
+        .get(isLoggedIn, showHandler.getShows);
+        
+   
     //The 404 Route (ALWAYS Keep this as the last route)
-    app.use(function(req, res, next){
-      res.status(404).render('notfound');
+    app.use(function(req, res, next) {
+        res.status(404).render('notfound');
     });
     
    

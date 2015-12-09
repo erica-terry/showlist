@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="../controllers/showController.client.js"></script>
+
+    <title>ShowList</title>
+</head>
+<body ng-controller="ShowController as ctlr">
+
+	<!-- Navigation bar -->
+	<%include templates/header.ejs %>
+	<!-- End Navigation bar -->
+
+
+	<div class="container">
+		<h1>{{title}}</h1>
+		<br>
+		<div class="input-group">
+			<span class="input-group-addon">
+				<span class="glyphicon glyphicon-search"></span>
+			</span>
+			<input type="text" class="form-control" ng-model="ctlr.searchInput">
+		</div>
+		<br>
+
+		<h3>My list of shows</h3>
+		<div class="input-group">
+			<select class="form-control pull-right" ng-model="ctlr.order" ng-options="order as order.title for order in ctlr.orders"></select>
+			<br>
+		</div>
+		
+
+		<ul class="list-group">
+			<br>
+			<li class="list-group-item" ng-repeat="show in showlist | filter:ctlr.searchInput | orderBy:ctlr.order.key:ctlr.order.reverse">
+
+				<a><span class="glyphicon glyphicon-chevron-down" role="button" data-toggle="collapse" href="#desc{{show._id}}" aria-expanded="false" aria-controls="desc{{show._id}}">&nbsp;</span></a>
+
+				{{show.title}} ({{show.year}}) &nbsp;
+
+				<span ng-if="show.rating && show.rating!=0" ng-repeat="i in getTimes(show.rating) track by $index">
+					<span class="glyphicon glyphicon-star"></span>
+				</span>
+				
+				<div class="collapse" id="desc{{show._id}}" >
+					<div><br/></div>
+					<div class="well">
+						{{show.description}} <span ng-if="!show.description">No Description Yet!</span>
+					</div>
+				</div>
+
+			</li>
+		</ul>
